@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\ListStudents;
 
 Route::view('/', 'welcome');
 
@@ -11,5 +12,11 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::middleware('auth')->group(function () {
+    
+    Route::get('/students', ListStudents::class)->name('students.index');
+    
+});
 
 require __DIR__.'/auth.php';
