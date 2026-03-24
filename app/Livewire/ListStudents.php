@@ -2,14 +2,20 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
+use App\Models\Student;
 use Livewire\Attributes\Layout;
+use Livewire\Component;
+use Livewire\WithPagination;
 
+#[Layout('layouts.app')]
 class ListStudents extends Component
 {
-    #[Layout('layouts. app')]
+    use WithPagination;
+
     public function render()
     {
-        return view('livewire.list-students');
+        return view('livewire.list-students', [
+            'students' => Student::paginate(10),
+        ]);
     }
 }
